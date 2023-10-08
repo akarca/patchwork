@@ -6,6 +6,7 @@ Management of various (usually binary) package types - OS, language, etc.
 # apt/deb, rpm/yum/dnf, arch/pacman, etc etc etc.
 
 from invoke.exceptions import UnexpectedExit
+
 from patchwork.files import append, contains, exists
 from patchwork.info import distro_family
 
@@ -52,6 +53,19 @@ def apt_install(c, *packages):
 
 def install_pyenv(c):
     print("==> Install pyenv")
+    apt_install(
+        c,
+        "build-essential",
+        "libreadline-dev",
+        "libffi-dev",
+        "libncurses-dev",
+        "libbz2-dev",
+        "libssl-dev",
+        "python3.11-dev",
+        "libsqlite3-dev",
+        "liblzma-dev",
+        "liblzma5",
+    )
     if not exists(c, "/root/.pyenv/bin/pyenv"):
         c.run("curl https://pyenv.run | bash")
     else:
