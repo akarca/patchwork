@@ -6,7 +6,6 @@ Management of various (usually binary) package types - OS, language, etc.
 # apt/deb, rpm/yum/dnf, arch/pacman, etc etc etc.
 
 from invoke.exceptions import UnexpectedExit
-
 from patchwork.files import append, contains, exists
 from patchwork.info import distro_family
 
@@ -61,10 +60,13 @@ def install_pyenv(c):
         "libncurses-dev",
         "libbz2-dev",
         "libssl-dev",
-        "python3.11-dev",
         "libsqlite3-dev",
         "liblzma-dev",
         "liblzma5",
+        "zlib1g-dev",
+        "libncurses5-dev",
+        "libgdbm-dev",
+        "libnss3-dev",
     )
     if not exists(c, "/root/.pyenv/bin/pyenv"):
         c.run("curl https://pyenv.run | bash")
